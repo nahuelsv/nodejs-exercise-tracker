@@ -4,8 +4,8 @@ const createUser = async ({ user }) => {
     try {
        const response = await new User(user).save();
        return response;
-    } catch (error) {
-        throw error;
+    } catch (error) {        
+        throw error.errors || error;
     }
 }
 
