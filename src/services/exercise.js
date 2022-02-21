@@ -7,15 +7,7 @@ const addExercise = async ({user, exercises}) => {
         const exercise = new Exercise(exercises)
         await exercise.validate()
         const response = await User.findOneAndUpdate( 
-            {
-                username: user.username
-            }, 
-            {
-                $push: { exercises: exercise} 
-            },
-            {
-                new: true
-            } 
+            { username: user.username }, { $push: { exercises: exercise} }, { new: true } 
         )
         return response
     } catch (err) {
@@ -44,15 +36,11 @@ const editExercise = async ({user, exercise}) => {
                 }
             },
             { 
-                $set: { 
-                    "exercises.$[outer].description": exercise.description
-                }
+                $set: { "exercises.$[outer].description": exercise.description }
             },
             {
                 arrayFilters: [
-                    {
-                        "outer._id": ObjectId(exercise.id)
-                    }
+                    { "outer._id": ObjectId(exercise.id) }
                 ],
                 new: true
             }

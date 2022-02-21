@@ -3,8 +3,9 @@ const router = express.Router()
 const ExerciseController = require('../controllers/exercise')
 const auth = require('../middlewares/auth')
 
-router.post("/exercise", auth, ExerciseController.addExercise)
-router.get("/exercise", auth, ExerciseController.getAll)
-router.put("/exercise", auth, ExerciseController.editExercise)
+router.route("/exercise")
+    .post(auth, ExerciseController.addExercise)
+    .get(auth, ExerciseController.getAll)
+    .put( auth, ExerciseController.editExercise)
 
 module.exports = router
