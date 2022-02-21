@@ -1,6 +1,4 @@
-const res = require('express/lib/response')
 const { ObjectId } = require('mongodb')
-const exercise = require('../models/exercise.js')
 const User = require('../models/user.js')
 
 const addExercise = async ({user, exercises}) => {
@@ -56,7 +54,6 @@ const editExercise = async ({user, exercise}) => {
                 new: true
             }
         )
-        console.log(response)
         return response
     } catch (err) {
         throw err.errors || err
