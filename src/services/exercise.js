@@ -1,14 +1,17 @@
 const { ObjectId } = require('mongodb')
 const User = require('../models/user.js')
+const Exercise = require('../models/exercise.js').model
 
-const addExercise = async ({user, exercises}) => {
-    try {
+const addExercise = async ({user, exercises}) => {    
+    try {        
+        const exercise = new Exercise(exercises)
+        await exercise.validate()
         const response = await User.findOneAndUpdate( 
             {
                 username: user.username
             }, 
             {
-                $push: { exercises: exercises} 
+                $push: { exercises: exercise} 
             },
             {
                 new: true
